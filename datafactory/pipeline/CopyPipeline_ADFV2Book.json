@@ -1,0 +1,61 @@
+{
+	"name": "CopyPipeline_ADFV2Book",
+	"properties": {
+		"description": "Data copy from SQL Server to Storage account",
+		"activities": [
+			{
+				"name": "Copy_cd5",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "."
+					},
+					{
+						"name": "Destination",
+						"value": "customers//website-customer"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT [CustomerID] \r\n      ,[CustomerName] \r\n      ,[CustomerCategoryName] \r\n      ,[PrimaryContact] \r\n      ,[AlternateContact] \r\n      ,[PhoneNumber] \r\n      ,[FaxNumber] \r\n      ,[BuyingGroupName] \r\n      ,[WebsiteURL] \r\n      ,[DeliveryMethod] \r\n      ,[CityName] \r\n  FROM [Website].[Customers] "
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_cd5",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_cd5",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

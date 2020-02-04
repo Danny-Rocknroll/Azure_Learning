@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_cd5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Destination_BlobStorage_Customers",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "website-customer",
+				"container": "customers"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
